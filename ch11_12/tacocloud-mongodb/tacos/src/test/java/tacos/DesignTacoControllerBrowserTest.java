@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -23,27 +22,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class DesignTacoControllerBrowserTest {
-  
+
   private static ChromeDriver browser;
-  
-  @LocalServerPort
-  private int port;
-  
-  @Autowired
-  TestRestTemplate rest;
-  
+  @Autowired TestRestTemplate rest;
+  @LocalServerPort private int port;
+
   @BeforeClass
   public static void openBrowser() {
     browser = new ChromeDriver();
-    browser.manage().timeouts()
-        .implicitlyWait(10, TimeUnit.SECONDS);
+    browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
-  
+
   @AfterClass
   public static void closeBrowser() {
     browser.quit();
   }
-  
+
   @Test
   @Ignore("TODO: Need to get around authentication in this test")
   public void testDesignATacoPage() throws Exception {
@@ -51,28 +45,25 @@ public class DesignTacoControllerBrowserTest {
 
     List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
     assertEquals(5, ingredientGroups.size());
-    
+
     WebElement wrapGroup = ingredientGroups.get(0);
     List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
     assertEquals(2, wraps.size());
     assertIngredient(wrapGroup, 0, "FLTO", "Flour Tortilla");
     assertIngredient(wrapGroup, 1, "COTO", "Corn Tortilla");
-    
+
     WebElement proteinGroup = ingredientGroups.get(1);
     List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
     assertEquals(2, proteins.size());
     assertIngredient(proteinGroup, 0, "GRBF", "Ground Beef");
     assertIngredient(proteinGroup, 1, "CARN", "Carnitas");
   }
-  
-  private void assertIngredient(WebElement ingredientGroup, 
-                                int ingredientIdx, String id, String name) {
+
+  private void assertIngredient(
+      WebElement ingredientGroup, int ingredientIdx, String id, String name) {
     List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
     WebElement ingredient = proteins.get(ingredientIdx);
-    assertEquals(id, 
-        ingredient.findElement(By.tagName("input")).getAttribute("value"));
-    assertEquals(name, 
-        ingredient.findElement(By.tagName("span")).getText());
+    assertEquals(id, ingredient.findElement(By.tagName("input")).getAttribute("value"));
+    assertEquals(name, ingredient.findElement(By.tagName("span")).getText());
   }
-  
 }

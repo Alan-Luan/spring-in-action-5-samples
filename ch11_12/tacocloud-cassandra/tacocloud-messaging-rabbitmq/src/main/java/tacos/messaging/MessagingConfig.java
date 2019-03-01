@@ -11,5 +11,4 @@ public class MessagingConfig {
   public Jackson2JsonMessageConverter messageConverter() {
     return new Jackson2JsonMessageConverter();
   }
-
 }

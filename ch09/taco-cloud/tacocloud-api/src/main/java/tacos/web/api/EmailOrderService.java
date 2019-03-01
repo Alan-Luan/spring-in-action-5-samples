@@ -4,14 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
-import tacos.Ingredient;
-import tacos.Order;
-import tacos.PaymentMethod;
-import tacos.Taco;
-import tacos.User;
+import tacos.*;
 import tacos.data.IngredientRepository;
 import tacos.data.PaymentMethodRepository;
 import tacos.data.UserRepository;
@@ -24,7 +18,9 @@ public class EmailOrderService {
   private IngredientRepository ingredientRepo;
   private PaymentMethodRepository paymentMethodRepo;
 
-  public EmailOrderService(UserRepository userRepo, IngredientRepository ingredientRepo,
+  public EmailOrderService(
+      UserRepository userRepo,
+      IngredientRepository ingredientRepo,
       PaymentMethodRepository paymentMethodRepo) {
     this.userRepo = userRepo;
     this.ingredientRepo = ingredientRepo;
@@ -68,5 +64,4 @@ public class EmailOrderService {
 
     return order;
   }
-
 }

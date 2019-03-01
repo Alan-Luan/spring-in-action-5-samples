@@ -1,6 +1,6 @@
 server:
   port: 8888
-  
+
 # Note that this configuration reference a greeting-config repository in my
 # GitHub org. Because it's in my org, you won't be able to make changes to the
 # configuration it holds and thus won't be able to exercise the update capability

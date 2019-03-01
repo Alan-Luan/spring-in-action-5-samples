@@ -2,7 +2,7 @@ package tacos.restclient;
 
 import java.net.URI;
 import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
@@ -11,8 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.web.client.RestTemplate;
-
-import lombok.extern.slf4j.Slf4j;
 import tacos.Ingredient;
 import tacos.Taco;
 
@@ -29,7 +27,7 @@ public class RestExamples {
   public RestTemplate restTemplate() {
     return new RestTemplate();
   }
-  
+
   @Bean
   public CommandLineRunner fetchIngredients(TacoCloudClient tacoCloudClient) {
     return args -> {
@@ -44,19 +42,20 @@ public class RestExamples {
       }
     };
   }
-  
+
   @Bean
   public CommandLineRunner putAnIngredient(TacoCloudClient tacoCloudClient) {
     return args -> {
       log.info("----------------------- PUT -------------------------");
       Ingredient before = tacoCloudClient.getIngredientById("LETC");
       log.info("BEFORE:  " + before);
-      tacoCloudClient.updateIngredient(new Ingredient("LETC", "Shredded Lettuce", Ingredient.Type.VEGGIES));
+      tacoCloudClient.updateIngredient(
+          new Ingredient("LETC", "Shredded Lettuce", Ingredient.Type.VEGGIES));
       Ingredient after = tacoCloudClient.getIngredientById("LETC");
       log.info("AFTER:  " + after);
     };
   }
-  
+
   @Bean
   public CommandLineRunner addAnIngredient(TacoCloudClient tacoCloudClient) {
     return args -> {
@@ -64,16 +63,16 @@ public class RestExamples {
       Ingredient chix = new Ingredient("CHIX", "Shredded Chicken", Ingredient.Type.PROTEIN);
       Ingredient chixAfter = tacoCloudClient.createIngredient(chix);
       log.info("AFTER=1:  " + chixAfter);
-//      Ingredient beefFajita = new Ingredient("BFFJ", "Beef Fajita", Ingredient.Type.PROTEIN);
-//      URI uri = tacoCloudClient.createIngredient(beefFajita);
-//      log.info("AFTER-2:  " + uri);      
-//      Ingredient shrimp = new Ingredient("SHMP", "Shrimp", Ingredient.Type.PROTEIN);
-//      Ingredient shrimpAfter = tacoCloudClient.createIngredient(shrimp);
-//      log.info("AFTER-3:  " + shrimpAfter);      
+      //      Ingredient beefFajita = new Ingredient("BFFJ", "Beef Fajita",
+      // Ingredient.Type.PROTEIN);
+      //      URI uri = tacoCloudClient.createIngredient(beefFajita);
+      //      log.info("AFTER-2:  " + uri);
+      //      Ingredient shrimp = new Ingredient("SHMP", "Shrimp", Ingredient.Type.PROTEIN);
+      //      Ingredient shrimpAfter = tacoCloudClient.createIngredient(shrimp);
+      //      log.info("AFTER-3:  " + shrimpAfter);
     };
   }
 
-  
   @Bean
   public CommandLineRunner deleteAnIngredient(TacoCloudClient tacoCloudClient) {
     return args -> {
@@ -84,7 +83,6 @@ public class RestExamples {
       Ingredient shrimp = new Ingredient("SHMP", "Shrimp", Ingredient.Type.PROTEIN);
       tacoCloudClient.createIngredient(shrimp);
 
-      
       Ingredient before = tacoCloudClient.getIngredientById("CHIX");
       log.info("BEFORE:  " + before);
       tacoCloudClient.deleteIngredient(before);
@@ -102,18 +100,18 @@ public class RestExamples {
       log.info("AFTER:  " + after);
     };
   }
-  
+
   //
   // Traverson examples
   //
-  
+
   @Bean
   public Traverson traverson() {
-    Traverson traverson = new Traverson(
-        URI.create("http://localhost:8080/api"), MediaTypes.HAL_JSON);
+    Traverson traverson =
+        new Traverson(URI.create("http://localhost:8080/api"), MediaTypes.HAL_JSON);
     return traverson;
   }
-  
+
   @Bean
   public CommandLineRunner traversonGetIngredients(TacoCloudClient tacoCloudClient) {
     return args -> {
@@ -124,21 +122,23 @@ public class RestExamples {
       }
     };
   }
-  
+
   @Bean
   public CommandLineRunner traversonSaveIngredient(TacoCloudClient tacoCloudClient) {
     return args -> {
-      Ingredient pico = tacoCloudClient.addIngredient(
-          new Ingredient("PICO", "Pico de Gallo", Ingredient.Type.SAUCE));
+      Ingredient pico =
+          tacoCloudClient.addIngredient(
+              new Ingredient("PICO", "Pico de Gallo", Ingredient.Type.SAUCE));
       List<Ingredient> allIngredients = tacoCloudClient.getAllIngredients();
-      log.info("----------------------- ALL INGREDIENTS AFTER SAVING PICO -------------------------");
+      log.info(
+          "----------------------- ALL INGREDIENTS AFTER SAVING PICO -------------------------");
       for (Ingredient ingredient : allIngredients) {
         log.info("   -  " + ingredient);
       }
       tacoCloudClient.deleteIngredient(pico);
     };
   }
-  
+
   @Bean
   public CommandLineRunner traversonRecentTacos(TacoCloudClient tacoCloudClient) {
     return args -> {
@@ -149,5 +149,4 @@ public class RestExamples {
       }
     };
   }
-
 }

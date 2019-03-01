@@ -1,8 +1,7 @@
 package tacos.kitchen;
 
-import org.springframework.stereotype.Component;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import tacos.Order;
 
 @Component
@@ -14,5 +13,4 @@ public class KitchenUI {
     //       To display it in some sort of UI.
     log.info("RECEIVED ORDER:  " + order);
   }
-  
 }

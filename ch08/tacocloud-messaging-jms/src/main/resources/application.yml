@@ -11,14 +11,14 @@ spring:
     password: letm31n
     embedded:
       enabled: false
-    
+
 ---
 # None of these properties will actually work as configured for this profile.
 # But it is left here as an example of configuring for a production profile
 # that will override the local configuration in the default profile.
 spring:
   profiles: production
-    
+
   artemis:
     host: artemis.tacocloud.com
     port: 61617

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GreetingController {
-  
+
   private final GreetingProps props;
 
   public GreetingController(GreetingProps props) {
@@ -16,5 +16,4 @@ public class GreetingController {
   public String message() {
     return props.getMessage();
   }
-  
 }

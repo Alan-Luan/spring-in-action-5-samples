@@ -11,7 +11,7 @@ taco:
   discount:
     codes:
       abcdef: 10
-      
+
 #logging:
 #  level:
 #    org.springframework.data.rest: debug
@@ -20,12 +20,12 @@ spring:
   data:
     rest:
       base-path: /api
-      
-# The values given here are actually the default values. But they are explicitly
-# set here as an example of setting the Kafka properties.
+
+  # The values given here are actually the default values. But they are explicitly
+  # set here as an example of setting the Kafka properties.
   kafka:
     bootstrap-servers:
-    - localhost:9092
+      - localhost:9092
     template:
       default-topic: tacocloud.orders.topic
     producer:
@@ -35,12 +35,12 @@ spring:
 ---
 spring:
   profiles: prod
-  
+
   datasource:
     url: jdbc:mysql://localhost/tacocloud
     username: tacouser
     password: tacopassword
-    
+
 logging:
   level:
     tacos: WARN

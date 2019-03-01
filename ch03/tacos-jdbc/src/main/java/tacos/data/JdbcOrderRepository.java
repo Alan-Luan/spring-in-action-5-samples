@@ -1,20 +1,17 @@
 // tag::core[]
 package tacos.data;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import tacos.Taco;
 import tacos.Order;
+import tacos.Taco;
 
 @Repository
 public class JdbcOrderRepository implements OrderRepository {
@@ -25,18 +22,16 @@ public class JdbcOrderRepository implements OrderRepository {
 
   @Autowired
   public JdbcOrderRepository(JdbcTemplate jdbc) {
-    this.orderInserter = new SimpleJdbcInsert(jdbc)
-        .withTableName("Taco_Order")
-        .usingGeneratedKeyColumns("id");
+    this.orderInserter =
+        new SimpleJdbcInsert(jdbc).withTableName("Taco_Order").usingGeneratedKeyColumns("id");
 
-    this.orderTacoInserter = new SimpleJdbcInsert(jdbc)
-        .withTableName("Taco_Order_Tacos");
+    this.orderTacoInserter = new SimpleJdbcInsert(jdbc).withTableName("Taco_Order_Tacos");
 
     this.objectMapper = new ObjectMapper();
   }
-// end::core[]
+  // end::core[]
 
-// tag::save[]
+  // tag::save[]
   @Override
   public Order save(Order order) {
     order.setPlacedAt(new Date());
@@ -52,14 +47,10 @@ public class JdbcOrderRepository implements OrderRepository {
 
   private long saveOrderDetails(Order order) {
     @SuppressWarnings("unchecked")
-    Map<String, Object> values =
-        objectMapper.convertValue(order, Map.class);
+    Map<String, Object> values = objectMapper.convertValue(order, Map.class);
     values.put("placedAt", order.getPlacedAt());
 
-    long orderId =
-        orderInserter
-            .executeAndReturnKey(values)
-            .longValue();
+    long orderId = orderInserter.executeAndReturnKey(values).longValue();
     return orderId;
   }
 
@@ -69,16 +60,16 @@ public class JdbcOrderRepository implements OrderRepository {
     values.put("taco", taco.getId());
     orderTacoInserter.execute(values);
   }
-// end::save[]
+  // end::save[]
 
-/*
-// tag::core[]
+  /*
+  // tag::core[]
 
-...
+  ...
 
-// end::core[]
- */
+  // end::core[]
+   */
 
-// tag::core[]
+  // tag::core[]
 }
 // end::core[]

@@ -3,19 +3,12 @@ package tacos.web;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
+import org.springframework.web.bind.annotation.*;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Order;
@@ -23,21 +16,21 @@ import tacos.Taco;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
 
-//tag::injectingDesignRepository[]
-//tag::injectingIngredientRepository[]
+// tag::injectingDesignRepository[]
+// tag::injectingIngredientRepository[]
 @Controller
 @RequestMapping("/design")
-//end::injectingIngredientRepository[]
+// end::injectingIngredientRepository[]
 @SessionAttributes("order")
-//tag::injectingIngredientRepository[]
+// tag::injectingIngredientRepository[]
 public class DesignTacoController {
 
   private final IngredientRepository ingredientRepo;
 
-  //end::injectingIngredientRepository[]
+  // end::injectingIngredientRepository[]
   private TacoRepository tacoRepo;
 
-  //end::injectingDesignRepository[]
+  // end::injectingDesignRepository[]
   /*
   //tag::injectingIngredientRepository[]
   public DesignTacoController(IngredientRepository ingredientRepo) {
@@ -45,12 +38,10 @@ public class DesignTacoController {
   }
   //end::injectingIngredientRepository[]
    */
-  //tag::injectingDesignRepository[]
+  // tag::injectingDesignRepository[]
 
   @Autowired
-  public DesignTacoController(
-        IngredientRepository ingredientRepo,
-        TacoRepository tacoRepo) {
+  public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
     this.ingredientRepo = ingredientRepo;
     this.tacoRepo = tacoRepo;
   }
@@ -65,9 +56,9 @@ public class DesignTacoController {
     return new Taco();
   }
 
-  //end::injectingDesignRepository[]
+  // end::injectingDesignRepository[]
 
-  //tag::injectingIngredientRepository[]
+  // tag::injectingIngredientRepository[]
 
   @GetMapping
   public String showDesignForm(Model model) {
@@ -76,19 +67,16 @@ public class DesignTacoController {
 
     Type[] types = Ingredient.Type.values();
     for (Type type : types) {
-      model.addAttribute(type.toString().toLowerCase(),
-          filterByType(ingredients, type));
+      model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
     }
 
     return "design";
   }
-  //end::injectingIngredientRepository[]
+  // end::injectingIngredientRepository[]
 
-//tag::injectingDesignRepository[]
+  // tag::injectingDesignRepository[]
   @PostMapping
-  public String processDesign(
-      @Valid Taco taco, Errors errors,
-      @ModelAttribute Order order) {
+  public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
 
     if (errors.hasErrors()) {
       return "design";
@@ -100,14 +88,10 @@ public class DesignTacoController {
     return "redirect:/orders/current";
   }
 
-//end::injectingDesignRepository[]
+  // end::injectingDesignRepository[]
 
-  private List<Ingredient> filterByType(
-      List<Ingredient> ingredients, Type type) {
-    return ingredients
-              .stream()
-              .filter(x -> x.getType().equals(type))
-              .collect(Collectors.toList());
+  private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+    return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
   }
 
   /*
@@ -119,9 +103,9 @@ public class DesignTacoController {
   //end::injectingDesignRepository[]
   */
 
-//tag::injectingDesignRepository[]
-//tag::injectingIngredientRepository[]
+  // tag::injectingDesignRepository[]
+  // tag::injectingIngredientRepository[]
 
 }
-//end::injectingIngredientRepository[]
-//end::injectingDesignRepository[]
+// end::injectingIngredientRepository[]
+// end::injectingDesignRepository[]

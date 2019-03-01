@@ -1,6 +1,6 @@
 server:
   port: 8989
-  
+
 #
 # In chapter 15, the turbine.app-config property is shown to be configured with 
 # multiple service names. Since this project does not (yet) contain the entire 
@@ -10,6 +10,6 @@ server:
 #
 turbine:
   app-config: ingredient-service, ingredient-client
-#  app-config: ingredient-service, taco-service, order-service, user-service
+  #  app-config: ingredient-service, taco-service, order-service, user-service
   cluster-name-expression: "'default'"
   

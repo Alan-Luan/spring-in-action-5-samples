@@ -4,21 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import lombok.Data;
 
 @Data
 @Document
 public class Order implements Serializable {
   private static final long serialVersionUID = 1L;
-  
-  @Id
-  private String id;
+
+  @Id private String id;
   private Date placedAt = new Date();
-  
+
   private User user;
 
   private String deliveryName;
@@ -37,11 +34,9 @@ public class Order implements Serializable {
 
   private String ccCVV;
 
-
   private List<Taco> tacos = new ArrayList<>();
-  
+
   public void addDesign(Taco design) {
     this.tacos.add(design);
-}
-
+  }
 }

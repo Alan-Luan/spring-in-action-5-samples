@@ -1,36 +1,28 @@
 package tacos;
+
+import com.datastax.driver.core.utils.UUIDs;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
-
-import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.Table;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.
-                                          SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.datastax.driver.core.utils.UUIDs;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 @Table("users")
 public class User implements UserDetails {
 
   private static final long serialVersionUID = 1L;
-
-  @PrimaryKeyColumn(type=PrimaryKeyType.PARTITIONED)
-  private UUID id = UUIDs.timeBased();
-  
   private final String username;
-  
   private final String password;
   private final String fullname;
   private final String street;
@@ -39,7 +31,10 @@ public class User implements UserDetails {
   private final String zip;
   private final String phoneNumber;
   private final String email;
-  
+
+  @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
+  private UUID id = UUIDs.timeBased();
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
@@ -64,5 +59,4 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
 }

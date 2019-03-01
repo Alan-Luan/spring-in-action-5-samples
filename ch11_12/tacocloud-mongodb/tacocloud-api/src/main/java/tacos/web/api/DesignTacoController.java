@@ -1,21 +1,14 @@
 package tacos.web.api;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-//end::recents[]
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-//tag::recents[]
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tacos.Taco;
 import tacos.data.TacoRepository;
+
+// end::recents[]
+// tag::recents[]
 
 @RestController
 @RequestMapping(path = "/design", produces = "application/json")
@@ -42,5 +35,4 @@ public class DesignTacoController {
   public Mono<Taco> tacoById(@PathVariable("id") String id) {
     return tacoRepo.findById(id);
   }
-
 }

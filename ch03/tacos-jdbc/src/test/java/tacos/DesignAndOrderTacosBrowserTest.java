@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,27 +23,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class DesignAndOrderTacosBrowserTest {
-  
+
   private static HtmlUnitDriver browser;
-  
-  @LocalServerPort
-  private int port;
-  
-  @Autowired
-  TestRestTemplate rest;
-  
+  @Autowired TestRestTemplate rest;
+  @LocalServerPort private int port;
+
   @BeforeClass
   public static void setup() {
     browser = new HtmlUnitDriver();
-    browser.manage().timeouts()
-        .implicitlyWait(10, TimeUnit.SECONDS);
+    browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
-  
+
   @AfterClass
   public static void closeBrowser() {
     browser.quit();
   }
-  
+
   @Test
   public void testDesignATacoPage_HappyPath() throws Exception {
     browser.get(homePageUrl());
@@ -56,7 +50,7 @@ public class DesignAndOrderTacosBrowserTest {
     fillInAndSubmitOrderForm();
     assertEquals(homePageUrl(), browser.getCurrentUrl());
   }
-  
+
   @Test
   public void testDesignATacoPage_EmptyOrderInfo() throws Exception {
     browser.get(homePageUrl());
@@ -86,7 +80,7 @@ public class DesignAndOrderTacosBrowserTest {
     assertDesignPageElements();
 
     for (String ingredient : ingredients) {
-      browser.findElementByCssSelector("input[value='" + ingredient + "']").click();      
+      browser.findElementByCssSelector("input[value='" + ingredient + "']").click();
     }
     browser.findElementByCssSelector("input#name").sendKeys(name);
     browser.findElementByCssSelector("form").submit();
@@ -96,13 +90,13 @@ public class DesignAndOrderTacosBrowserTest {
     assertEquals(designPageUrl(), browser.getCurrentUrl());
     List<WebElement> ingredientGroups = browser.findElementsByClassName("ingredient-group");
     assertEquals(5, ingredientGroups.size());
-    
+
     WebElement wrapGroup = browser.findElementByCssSelector("div.ingredient-group#wraps");
     List<WebElement> wraps = wrapGroup.findElements(By.tagName("div"));
     assertEquals(2, wraps.size());
     assertIngredient(wrapGroup, 0, "FLTO", "Flour Tortilla");
     assertIngredient(wrapGroup, 1, "COTO", "Corn Tortilla");
-    
+
     WebElement proteinGroup = browser.findElementByCssSelector("div.ingredient-group#proteins");
     List<WebElement> proteins = proteinGroup.findElements(By.tagName("div"));
     assertEquals(2, proteins.size());
@@ -127,7 +121,6 @@ public class DesignAndOrderTacosBrowserTest {
     assertIngredient(sauceGroup, 0, "SLSA", "Salsa");
     assertIngredient(sauceGroup, 1, "SRCR", "Sour Cream");
   }
-  
 
   private void fillInAndSubmitOrderForm() {
     assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
@@ -145,7 +138,7 @@ public class DesignAndOrderTacosBrowserTest {
   private void submitEmptyOrderForm() {
     assertEquals(currentOrderDetailsPageUrl(), browser.getCurrentUrl());
     browser.findElementByCssSelector("form").submit();
-    
+
     assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
 
     List<String> validationErrors = getValidationErrorTexts();
@@ -158,14 +151,13 @@ public class DesignAndOrderTacosBrowserTest {
     assertTrue(validationErrors.contains("Zip code is required"));
     assertTrue(validationErrors.contains("Not a valid credit card number"));
     assertTrue(validationErrors.contains("Must be formatted MM/YY"));
-    assertTrue(validationErrors.contains("Invalid CVV"));    
+    assertTrue(validationErrors.contains("Invalid CVV"));
   }
 
   private List<String> getValidationErrorTexts() {
     List<WebElement> validationErrorElements = browser.findElementsByClassName("validationError");
-    List<String> validationErrors = validationErrorElements.stream()
-        .map(el -> el.getText())
-        .collect(Collectors.toList());
+    List<String> validationErrors =
+        validationErrorElements.stream().map(el -> el.getText()).collect(Collectors.toList());
     return validationErrors;
   }
 
@@ -180,7 +172,7 @@ public class DesignAndOrderTacosBrowserTest {
     fillField("input#ccExpiration", "14/91");
     fillField("input#ccCVV", "1234");
     browser.findElementByCssSelector("form").submit();
-    
+
     assertEquals(orderDetailsPageUrl(), browser.getCurrentUrl());
 
     List<String> validationErrors = getValidationErrorTexts();
@@ -188,7 +180,7 @@ public class DesignAndOrderTacosBrowserTest {
     assertTrue(validationErrors.contains("Please correct the problems below and resubmit."));
     assertTrue(validationErrors.contains("Not a valid credit card number"));
     assertTrue(validationErrors.contains("Must be formatted MM/YY"));
-    assertTrue(validationErrors.contains("Invalid CVV"));    
+    assertTrue(validationErrors.contains("Invalid CVV"));
   }
 
   private void fillField(String fieldName, String value) {
@@ -196,15 +188,13 @@ public class DesignAndOrderTacosBrowserTest {
     field.clear();
     field.sendKeys(value);
   }
-  
-  private void assertIngredient(WebElement ingredientGroup, 
-                                int ingredientIdx, String id, String name) {
+
+  private void assertIngredient(
+      WebElement ingredientGroup, int ingredientIdx, String id, String name) {
     List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
     WebElement ingredient = proteins.get(ingredientIdx);
-    assertEquals(id, 
-        ingredient.findElement(By.tagName("input")).getAttribute("value"));
-    assertEquals(name, 
-        ingredient.findElement(By.tagName("span")).getText());
+    assertEquals(id, ingredient.findElement(By.tagName("input")).getAttribute("value"));
+    assertEquals(name, ingredient.findElement(By.tagName("span")).getText());
   }
 
   private void clickDesignATaco() {
@@ -217,7 +207,6 @@ public class DesignAndOrderTacosBrowserTest {
     browser.findElementByCssSelector("a[id='another']").click();
   }
 
- 
   //
   // URL helper methods
   //
@@ -236,5 +225,4 @@ public class DesignAndOrderTacosBrowserTest {
   private String currentOrderDetailsPageUrl() {
     return homePageUrl() + "orders/current";
   }
-
 }

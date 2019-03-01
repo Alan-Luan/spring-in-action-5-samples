@@ -2,7 +2,6 @@ package tacos.web.api;
 
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import reactor.core.publisher.Flux;
 import tacos.Taco;
 import tacos.data.TacoRepository;
@@ -16,10 +15,8 @@ public class RecentTacosController {
     this.tacoRepo = tacoRepo;
   }
 
-  @GetMapping(path="/tacos/recent", produces="application/hal+json")
+  @GetMapping(path = "/tacos/recent", produces = "application/hal+json")
   public Flux<Taco> recentTacos() {
-    return tacoRepo.findAll()
-        .take(12);
+    return tacoRepo.findAll().take(12);
   }
-
 }

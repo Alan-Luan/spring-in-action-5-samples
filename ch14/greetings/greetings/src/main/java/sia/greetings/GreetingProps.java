@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "greeting")
 @Component
 public class GreetingProps {
-  
+
   private String message;
 
   public String getMessage() {
@@ -16,5 +16,4 @@ public class GreetingProps {
   public void setMessage(String message) {
     this.message = message;
   }
-  
 }

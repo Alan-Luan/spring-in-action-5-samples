@@ -3,7 +3,6 @@ package tacos;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -17,5 +16,4 @@ public class Order {
   private String deliveryZip;
 
   private List<Taco> tacos = new ArrayList<>();
-
 }

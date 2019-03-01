@@ -1,32 +1,25 @@
 package tacos;
+
 import java.util.Arrays;
 import java.util.Collection;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.
-                                          SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 @Document
 public class User implements UserDetails {
 
   private static final long serialVersionUID = 1L;
-
-  @Id
-  private String id;
-  
   private final String username;
-  
   private final String password;
   private final String fullname;
   private final String street;
@@ -35,7 +28,8 @@ public class User implements UserDetails {
   private final String zip;
   private final String phoneNumber;
   private final String email;
-  
+  @Id private String id;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
@@ -60,5 +54,4 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
 }

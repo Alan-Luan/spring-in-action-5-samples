@@ -1,4 +1,5 @@
 package tacos.tacos;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.actuate.info.Info.Builder;
@@ -21,5 +22,4 @@ public class TacoCountInfoContributor implements InfoContributor {
     tacoMap.put("count", tacoCount);
     builder.withDetail("taco-stats", tacoMap);
   }
-
 }

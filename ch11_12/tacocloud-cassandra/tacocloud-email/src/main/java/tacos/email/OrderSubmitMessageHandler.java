@@ -1,14 +1,12 @@
 package tacos.email;
 
 import java.util.Map;
-
 import org.springframework.integration.handler.GenericHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class OrderSubmitMessageHandler
-       implements GenericHandler<Order> {
+public class OrderSubmitMessageHandler implements GenericHandler<Order> {
 
   private RestTemplate rest;
   private ApiProperties apiProps;

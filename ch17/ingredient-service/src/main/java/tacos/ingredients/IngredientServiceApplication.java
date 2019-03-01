@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableHystrix
 public class IngredientServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IngredientServiceApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(IngredientServiceApplication.class, args);
+  }
 }

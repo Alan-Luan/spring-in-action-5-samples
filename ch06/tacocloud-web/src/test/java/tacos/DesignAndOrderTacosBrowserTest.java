@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -28,18 +27,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DesignAndOrderTacosBrowserTest {
 
   private static HtmlUnitDriver browser;
-
-  @LocalServerPort
-  private int port;
-
-  @Autowired
-  TestRestTemplate rest;
+  @Autowired TestRestTemplate rest;
+  @LocalServerPort private int port;
 
   @BeforeClass
   public static void setup() {
     browser = new HtmlUnitDriver();
-    browser.manage().timeouts()
-        .implicitlyWait(10, TimeUnit.SECONDS);
+    browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
 
   @AfterClass
@@ -126,7 +120,6 @@ public class DesignAndOrderTacosBrowserTest {
     browser.findElementByCssSelector("form#registerForm").submit();
   }
 
-
   private void doLogin(String username, String password) {
     browser.findElementByName("username").sendKeys(username);
     browser.findElementByName("password").sendKeys(password);
@@ -176,7 +169,6 @@ public class DesignAndOrderTacosBrowserTest {
     assertIngredient(sauceGroup, 1, "SRCR", "Sour Cream");
   }
 
-
   private void fillInAndSubmitOrderForm() {
     assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
     fillField("input#deliveryName", "Ima Hungry");
@@ -217,9 +209,8 @@ public class DesignAndOrderTacosBrowserTest {
 
   private List<String> getValidationErrorTexts() {
     List<WebElement> validationErrorElements = browser.findElementsByClassName("validationError");
-    List<String> validationErrors = validationErrorElements.stream()
-        .map(el -> el.getText())
-        .collect(Collectors.toList());
+    List<String> validationErrors =
+        validationErrorElements.stream().map(el -> el.getText()).collect(Collectors.toList());
     return validationErrors;
   }
 
@@ -251,14 +242,12 @@ public class DesignAndOrderTacosBrowserTest {
     field.sendKeys(value);
   }
 
-  private void assertIngredient(WebElement ingredientGroup,
-                                int ingredientIdx, String id, String name) {
+  private void assertIngredient(
+      WebElement ingredientGroup, int ingredientIdx, String id, String name) {
     List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
     WebElement ingredient = proteins.get(ingredientIdx);
-    assertEquals(id,
-        ingredient.findElement(By.tagName("input")).getAttribute("value"));
-    assertEquals(name,
-        ingredient.findElement(By.tagName("span")).getText());
+    assertEquals(id, ingredient.findElement(By.tagName("input")).getAttribute("value"));
+    assertEquals(name, ingredient.findElement(By.tagName("span")).getText());
   }
 
   private void clickDesignATaco() {
@@ -270,7 +259,6 @@ public class DesignAndOrderTacosBrowserTest {
     assertTrue(browser.getCurrentUrl().startsWith(orderDetailsPageUrl()));
     browser.findElementByCssSelector("a[id='another']").click();
   }
-
 
   //
   // URL helper methods
@@ -298,5 +286,4 @@ public class DesignAndOrderTacosBrowserTest {
   private String currentOrderDetailsPageUrl() {
     return homePageUrl() + "orders/current";
   }
-
 }

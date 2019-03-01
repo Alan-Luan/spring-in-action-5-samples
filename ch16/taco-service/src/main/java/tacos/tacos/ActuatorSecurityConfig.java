@@ -17,29 +17,22 @@ public class ActuatorSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     // @formatter:off
-    http
-      .requestMatcher(EndpointRequest.toAnyEndpoint().excluding("health", "info"))
-      .authorizeRequests()
-        .anyRequest().hasRole("ADMIN")
-        
-      .and()
-    
-      .httpBasic();
+    http.requestMatcher(EndpointRequest.toAnyEndpoint().excluding("health", "info"))
+        .authorizeRequests()
+        .anyRequest()
+        .hasRole("ADMIN")
+        .and()
+        .httpBasic();
     // @formatter:on
   }
-  
+
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-      .inMemoryAuthentication()
-        .withUser("admin")
-        .password("password")
-        .authorities("ROLE_ADMIN");
+    auth.inMemoryAuthentication().withUser("admin").password("password").authorities("ROLE_ADMIN");
   }
-  
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return NoOpPasswordEncoder.getInstance();
   }
-  
 }
