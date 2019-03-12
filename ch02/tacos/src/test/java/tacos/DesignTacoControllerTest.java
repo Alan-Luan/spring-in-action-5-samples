@@ -1,4 +1,3 @@
-// tag::testShowDesignForm[]
 package tacos;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -17,31 +16,23 @@ import org.springframework.test.web.servlet.MockMvc;
 import tacos.Ingredient.Type;
 import tacos.web.DesignTacoController;
 
-// tag::testProcessForm[]
 @RunWith(SpringRunner.class)
 @WebMvcTest(DesignTacoController.class)
 public class DesignTacoControllerTest {
-  // end::testProcessForm[]
 
   @Autowired private MockMvc mockMvc;
 
   private List<Ingredient> ingredients;
 
-  // end::testShowDesignForm[]
 
   /*
-  //tag::testProcessForm[]
      ...
 
-  //end::testProcessForm[]
    */
 
-  // tag::testProcessForm[]
   private Taco design;
 
-  // end::testProcessForm[]
 
-  // tag::testShowDesignForm[]
   @Before
   public void setup() {
     ingredients =
@@ -57,12 +48,10 @@ public class DesignTacoControllerTest {
             new Ingredient("SLSA", "Salsa", Type.SAUCE),
             new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
-    // end::testShowDesignForm[]
 
     design = new Taco();
     design.setName("Test Taco");
     design.setIngredients(Arrays.asList("FLTO", "GRBF", "CHED"));
-    // tag::testShowDesignForm[]
   }
 
   @Test
@@ -77,16 +66,12 @@ public class DesignTacoControllerTest {
         .andExpect(model().attribute("cheese", ingredients.subList(6, 8)))
         .andExpect(model().attribute("sauce", ingredients.subList(8, 10)));
   }
-  // end::testShowDesignForm[]
 
   /*
-  //tag::testProcessForm[]
      ...
 
-  //end::testProcessForm[]
    */
 
-  // tag::testProcessForm[]
   @Test
   public void processDesign() throws Exception {
     mockMvc
@@ -98,7 +83,4 @@ public class DesignTacoControllerTest {
         .andExpect(header().stringValues("Location", "/orders/current"));
   }
 
-  // tag::testShowDesignForm[]
 }
-// end::testShowDesignForm[]
-// end::testProcessForm[]

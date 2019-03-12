@@ -1,4 +1,3 @@
-// tag::recents[]
 package tacos.web.api;
 
 import java.util.Optional;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import tacos.Taco;
 import tacos.data.TacoRepository;
 
-// end::recents[]
-// tag::recents[]
 
 @RestController
 @RequestMapping(
@@ -32,7 +29,6 @@ public class DesignTacoController {
     PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
     return tacoRepo.findAll(page).getContent();
   }
-  // end::recents[]
 
   //  @GetMapping("/recenth")
   //  public Resources<TacoResource> recentTacosH() {
@@ -75,13 +71,11 @@ public class DesignTacoController {
   //    return tacosResources;
   //  }
 
-  // tag::postTaco[]
   @PostMapping(consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   public Taco postTaco(@RequestBody Taco taco) {
     return tacoRepo.save(taco);
   }
-  // end::postTaco[]
 
   @GetMapping("/{id}")
   public Taco tacoById(@PathVariable("id") Long id) {
@@ -101,6 +95,4 @@ public class DesignTacoController {
   //    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   //  }
 
-  // tag::recents[]
 }
-// end::recents[]

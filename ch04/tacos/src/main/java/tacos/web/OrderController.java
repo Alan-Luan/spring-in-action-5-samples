@@ -42,7 +42,6 @@ public class OrderController {
     return "orderForm";
   }
 
-  // tag::processOrderWithAuthenticationPrincipal[]
   @PostMapping
   public String processOrder(
       @Valid Order order,
@@ -61,6 +60,5 @@ public class OrderController {
 
     return "redirect:/";
   }
-  // end::processOrderWithAuthenticationPrincipal[]
 
 }

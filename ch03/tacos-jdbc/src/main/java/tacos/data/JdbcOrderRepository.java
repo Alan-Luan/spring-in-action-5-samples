@@ -1,4 +1,3 @@
-// tag::core[]
 package tacos.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,9 +28,7 @@ public class JdbcOrderRepository implements OrderRepository {
 
     this.objectMapper = new ObjectMapper();
   }
-  // end::core[]
 
-  // tag::save[]
   @Override
   public Order save(Order order) {
     order.setPlacedAt(new Date());
@@ -60,16 +57,11 @@ public class JdbcOrderRepository implements OrderRepository {
     values.put("taco", taco.getId());
     orderTacoInserter.execute(values);
   }
-  // end::save[]
 
   /*
-  // tag::core[]
 
   ...
 
-  // end::core[]
    */
 
-  // tag::core[]
 }
-// end::core[]

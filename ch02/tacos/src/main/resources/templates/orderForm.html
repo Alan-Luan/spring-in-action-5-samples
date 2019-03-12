@@ -1,4 +1,3 @@
-<!-- tag::allButValidation[] -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
@@ -24,77 +23,59 @@
   <h3>Deliver my taco masterpieces to...</h3>
   <label for="name">Name: </label>
   <input th:field="*{name}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{name}"
         th:if="${#fields.hasErrors('name')}">Name Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <label for="street">Street address: </label>
   <input th:field="*{street}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{street}"
         th:if="${#fields.hasErrors('street')}">Street Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <label for="city">City: </label>
   <input th:field="*{city}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{city}"
         th:if="${#fields.hasErrors('city')}">City Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <label for="state">State: </label>
   <input th:field="*{state}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{state}"
         th:if="${#fields.hasErrors('state')}">State Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <label for="zip">Zip code: </label>
   <input th:field="*{zip}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{zip}"
         th:if="${#fields.hasErrors('zip')}">Zip Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <h3>Here's how I'll pay...</h3>
-  <!-- tag::validatedField[] -->
   <label for="ccNumber">Credit Card #: </label>
   <input th:field="*{ccNumber}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{ccNumber}"
         th:if="${#fields.hasErrors('ccNumber')}">CC Num Error</span>
-  <!-- tag::allButValidation[] -->
-  <!-- end::validatedField[] -->
   <br/>
 
   <label for="ccExpiration">Expiration: </label>
   <input th:field="*{ccExpiration}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{ccExpiration}"
         th:if="${#fields.hasErrors('ccExpiration')}">CC Num Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <label for="ccCVV">CVV: </label>
   <input th:field="*{ccCVV}" type="text"/>
-  <!-- end::allButValidation[] -->
   <span class="validationError"
         th:errors="*{ccCVV}"
         th:if="${#fields.hasErrors('ccCVV')}">CC Num Error</span>
-  <!-- tag::allButValidation[] -->
   <br/>
 
   <input type="submit" value="Submit order"/>
@@ -102,4 +83,3 @@
 
 </body>
 </html>
-<!-- end::allButValidation[] -->

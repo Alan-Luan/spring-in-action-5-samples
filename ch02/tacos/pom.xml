@@ -31,12 +31,10 @@
   </properties>
 
   <dependencies>
-    <!-- tag::thymeleaf[] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
-    <!-- end::thymeleaf[] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -48,13 +46,11 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- tag::devTools[] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <!-- end::devTools[] -->
 
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>

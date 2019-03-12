@@ -49,7 +49,6 @@ public class DesignTacoController {
   }
 
   /*
-  //tag::processDesign[]
     @PostMapping
     public String processDesign(Design design) {
       // Save the taco design...
@@ -59,10 +58,8 @@ public class DesignTacoController {
       return "redirect:/orders/current";
     }
 
-  //end::processDesign[]
    */
 
-  // tag::processDesignValidated[]
   @PostMapping
   public String processDesign(
       @Valid @ModelAttribute("design") Taco design, Errors errors, Model model) {
@@ -77,14 +74,9 @@ public class DesignTacoController {
     return "redirect:/orders/current";
   }
 
-  // end::processDesignValidated[]
 
-  // tag::filterByType[]
   private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
     return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
   }
 
-  // end::filterByType[]
-  // tag::foot[]
 }
-// end::foot[]

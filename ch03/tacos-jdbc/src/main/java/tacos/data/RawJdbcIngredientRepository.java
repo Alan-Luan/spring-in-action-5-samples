@@ -67,7 +67,6 @@ public class RawJdbcIngredientRepository implements IngredientRepository {
     return ingredients;
   }
 
-  // tag::rawfindOne[]
   @Override
   public Ingredient findById(String id) {
     Connection connection = null;
@@ -111,7 +110,6 @@ public class RawJdbcIngredientRepository implements IngredientRepository {
     }
     return null;
   }
-  // end::rawfindOne[]
 
   @Override
   public Ingredient save(Ingredient ingredient) {

@@ -7,8 +7,6 @@ import reactor.core.publisher.Mono;
 import tacos.Taco;
 import tacos.data.TacoRepository;
 
-// end::recents[]
-// tag::recents[]
 
 @RestController
 @RequestMapping(path = "/design", produces = "application/json")

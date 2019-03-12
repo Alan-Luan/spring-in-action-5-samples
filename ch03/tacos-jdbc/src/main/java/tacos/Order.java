@@ -9,7 +9,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 
-// tag::newFields[]
 @Data
 public class Order {
 
@@ -17,7 +16,6 @@ public class Order {
 
   private Date placedAt;
 
-  // end::newFields[]
 
   @NotBlank(message = "Delivery name is required")
   private String deliveryName;
@@ -50,11 +48,7 @@ public class Order {
   }
 
   /*
-  // tag::newFields[]
     ...
 
-  // end::newFields[]
      */
-  // tag::newFields[]
 }
-// end::newFields[]
