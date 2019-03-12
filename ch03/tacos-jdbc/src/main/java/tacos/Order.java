@@ -16,7 +16,6 @@ public class Order {
 
   private Date placedAt;
 
-
   @NotBlank(message = "Delivery name is required")
   private String deliveryName;
 
@@ -48,7 +47,7 @@ public class Order {
   }
 
   /*
-    ...
+  ...
 
-     */
+   */
 }

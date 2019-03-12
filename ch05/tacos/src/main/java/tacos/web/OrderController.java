@@ -13,14 +13,12 @@ import tacos.Order;
 import tacos.User;
 import tacos.data.OrderRepository;
 
-
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
 public class OrderController {
 
   private OrderRepository orderRepo;
-
 
   private OrderProps props;
 
@@ -71,10 +69,10 @@ public class OrderController {
 
   /*
 
-    ...
+   ...
 
 
-   */
+  */
 
   @GetMapping
   public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
@@ -114,9 +112,9 @@ public class OrderController {
 
   /*
 
-    ...
+   ...
 
 
-   */
+  */
 
 }

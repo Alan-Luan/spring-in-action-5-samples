@@ -49,16 +49,16 @@ public class DesignTacoController {
   }
 
   /*
-    @PostMapping
-    public String processDesign(Design design) {
-      // Save the taco design...
-      // We'll do this in chapter 3
-      log.info("Processing design: " + design);
+   @PostMapping
+   public String processDesign(Design design) {
+     // Save the taco design...
+     // We'll do this in chapter 3
+     log.info("Processing design: " + design);
 
-      return "redirect:/orders/current";
-    }
+     return "redirect:/orders/current";
+   }
 
-   */
+  */
 
   @PostMapping
   public String processDesign(
@@ -74,9 +74,7 @@ public class DesignTacoController {
     return "redirect:/orders/current";
   }
 
-
   private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
     return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
   }
-
 }

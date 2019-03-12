@@ -21,25 +21,22 @@ import tacos.data.TacoRepository;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-
   private final IngredientRepository ingredientRepo;
 
   private TacoRepository designRepo;
 
-
   /*
-    @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo) {
-      this.ingredientRepo = ingredientRepo;
-    }
-     */
+  @Autowired
+  public DesignTacoController(IngredientRepository ingredientRepo) {
+    this.ingredientRepo = ingredientRepo;
+  }
+   */
 
   @Autowired
   public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
     this.ingredientRepo = ingredientRepo;
     this.designRepo = designRepo;
   }
-
 
   @ModelAttribute(name = "order")
   public Order order() {
@@ -50,7 +47,6 @@ public class DesignTacoController {
   public Taco taco() {
     return new Taco();
   }
-
 
   @GetMapping
   public String showDesignForm(Model model) {
@@ -84,8 +80,8 @@ public class DesignTacoController {
 
   /*
 
-    ...
+  ...
 
-     */
+   */
 
 }

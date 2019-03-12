@@ -47,8 +47,6 @@ public class DesignTacoController {
     return new Taco();
   }
 
-
-
   @GetMapping
   public String showDesignForm(Model model) {
     List<Ingredient> ingredients = new ArrayList<>();
@@ -75,7 +73,6 @@ public class DesignTacoController {
     return "redirect:/orders/current";
   }
 
-
   private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
     return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
   }
@@ -84,6 +81,5 @@ public class DesignTacoController {
 
    ...
   */
-
 
 }

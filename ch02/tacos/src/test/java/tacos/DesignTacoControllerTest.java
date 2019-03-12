@@ -24,14 +24,12 @@ public class DesignTacoControllerTest {
 
   private List<Ingredient> ingredients;
 
-
   /*
-     ...
+    ...
 
-   */
+  */
 
   private Taco design;
-
 
   @Before
   public void setup() {
@@ -47,7 +45,6 @@ public class DesignTacoControllerTest {
             new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
             new Ingredient("SLSA", "Salsa", Type.SAUCE),
             new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
-
 
     design = new Taco();
     design.setName("Test Taco");
@@ -68,9 +65,9 @@ public class DesignTacoControllerTest {
   }
 
   /*
-     ...
+    ...
 
-   */
+  */
 
   @Test
   public void processDesign() throws Exception {
@@ -82,5 +79,4 @@ public class DesignTacoControllerTest {
         .andExpect(status().is3xxRedirection())
         .andExpect(header().stringValues("Location", "/orders/current"));
   }
-
 }

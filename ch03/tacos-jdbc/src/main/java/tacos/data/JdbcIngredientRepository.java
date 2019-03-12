@@ -7,12 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import tacos.Ingredient;
 
-
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository {
 
   private JdbcTemplate jdbc;
-
 
   @Autowired
   public JdbcIngredientRepository(JdbcTemplate jdbc) {
@@ -29,8 +27,6 @@ public class JdbcIngredientRepository implements IngredientRepository {
     return jdbc.queryForObject(
         "select id, name, type from Ingredient where id=?", this::mapRowToIngredient, id);
   }
-
-
 
   /*
   @Override
@@ -66,7 +62,7 @@ public class JdbcIngredientRepository implements IngredientRepository {
 
   /*
 
-    ...
-     */
+  ...
+   */
 
 }

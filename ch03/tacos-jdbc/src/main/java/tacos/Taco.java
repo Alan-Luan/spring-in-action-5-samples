@@ -13,7 +13,6 @@ public class Taco {
 
   private Date createdAt;
 
-
   @NotNull
   @Size(min = 5, message = "Name must be at least 5 characters long")
   private String name;
@@ -22,7 +21,7 @@ public class Taco {
   private List<Ingredient> ingredients;
 
   /*
-     ...
+  ...
 
-     */
+  */
 }

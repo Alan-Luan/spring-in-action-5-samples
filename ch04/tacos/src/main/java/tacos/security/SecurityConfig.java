@@ -11,16 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-
-
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
   @Autowired private UserDetailsService userDetailsService;
-
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -29,11 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .access("hasRole('ROLE_USER')")
         .antMatchers("/", "/**")
         .access("permitAll")
-
         .and()
         .formLogin()
         .loginPage("/login")
-
         .and()
         .logout()
         .logoutSuccessUrl("/")
@@ -47,9 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .headers()
         .frameOptions()
-        .sameOrigin()
-
-    ;
+        .sameOrigin();
   }
 
   /*
@@ -164,6 +156,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .groupSearchFilter("member={0}");
     }
   */
-
 
 }
