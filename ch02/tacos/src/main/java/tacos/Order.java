@@ -9,7 +9,7 @@ import lombok.Data;
 public class Order {
 
   @NotBlank(message = "Name is required")
-  private String name;
+  private String name;    // taco name
 
   @NotBlank(message = "Street is required")
   private String street;
